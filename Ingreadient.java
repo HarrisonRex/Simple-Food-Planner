@@ -13,7 +13,7 @@ public class Ingreadient {
 		this.inStock = inStock;
 	}
 	public void setName(String nName) {
-		this.name = name;
+		this.name = nName;
 	}
 	public void setAmountStock(double amountStock) {
 		this.amountStock = amountStock;

@@ -3,20 +3,21 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Main {
+public class Start {
 	
-	private ArrayList<Ingreadient> ingsIn = new ArrayList<Ingreadient>();
+	private static ArrayList<Ingreadient> ingsIn = new ArrayList<Ingreadient>();
 	
-	public void Main(String args[]){
+	public static void main(String[] args){
 		loadIngreads();
+		
 		
 		//makeNow = new ArrayList();
 		//shopList = new ArrayList();
 	}
 	
-	public void loadIngreads() {
+	public static void loadIngreads() {
 		try {
-			File myObj = new File("in.txt");
+			File myObj = new File("ings.txt");
 			Scanner sc = new Scanner(myObj);
 			while (sc.hasNextLine()) {
 				String data = sc.nextLine();
@@ -29,21 +30,24 @@ public class Main {
 		}
 	}
 	
-	public void addIng(String line) {
+	public static void addIng(String line) {
 		int[] comLocations = new int[3];
 		String temp = line;
+		int j = 0;
 		
 		for(int i = 0; i < 3 -1; i++) {
-			int j = 0;
 			while(temp.charAt(0)!=',') {
 				temp = temp.substring(1);
+				j++;
 			}
+			j++;
+			temp = temp.substring(1);
 			comLocations[i] = j;
 		}
 		
 		boolean inStock = Boolean.parseBoolean(line.substring(0,comLocations[0]));
-		String name = line.substring(comLocations[0]+1,comLocations[1]);
-		double amountStock = Double.parseDouble(line.substring(comLocations[1]+1)); 
+		String name = line.substring(comLocations[0],comLocations[1]-1);
+		double amountStock = Double.parseDouble(line.substring(comLocations[1])); 
 		
 		ingsIn.add(new Ingreadient(inStock, name, amountStock));
 	}
